@@ -230,3 +230,4 @@ if not os.path.exists(folder_path):
 pt_path = os.path.join(folder_path, pt_name)
 
 torch.save(model.state_dict(), pt_path)
+#juseok
