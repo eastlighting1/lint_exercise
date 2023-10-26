@@ -18,7 +18,7 @@ import torch
 #import wandb
 import os
 
-# GPU 사용 시
+# GPU 사용 시!
 device = torch.device("cuda:0")
 
 parser = argparse.ArgumentParser(description='Polarity Recognition Model')
