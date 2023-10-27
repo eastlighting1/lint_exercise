@@ -30,3 +30,17 @@ jobs:
           # git checkout main
           # git merge $GITHUB_REF
           # git push
+
+      - name: Create Issue on Failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data } = await github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '메인 브랜치 푸시 오류',
+              body: 'main 브랜치로 직접 푸시할 수 없습니다. 개인 branch에 업로드 후 merge request를 하세요.',
+            });
+            console.log(`Created issue ${data.number}`);
