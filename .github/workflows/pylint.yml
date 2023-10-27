@@ -1,6 +1,9 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    paths:
+      - '**.py' # .py 파일이 변경되었을 때만 실행
 
 jobs:
   build:
