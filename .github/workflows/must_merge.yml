@@ -3,7 +3,6 @@ name: Merge to Main
 on:
   push:
     branches:
-      - main
       - '*'
     paths-ignore:
       - '.github/workflows/must_merge.yml' # 이 파일은 workflow 파일의 이름에 따라 조정하세요.
@@ -15,8 +14,8 @@ jobs:
     steps:
       - name: Check if main branch
         run: |
-          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
-            echo "This is not the main branch. Workflow aborted."
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            echo "Direct push to main branch is not allowed. Workflow aborted."
             exit 1
           fi
 
@@ -30,4 +29,3 @@ jobs:
           # git checkout main
           # git merge $GITHUB_REF
           # git push
-
