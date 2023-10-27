@@ -1,0 +1,33 @@
+name: Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+      - '*'
+    paths-ignore:
+      - '.github/workflows/must_merge.yml' # 이 파일은 workflow 파일의 이름에 따라 조정하세요.
+
+jobs:
+  merge_to_main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if main branch
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "This is not the main branch. Workflow aborted."
+            exit 1
+          fi
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge to Main
+        run: |
+          # 병합 작업을 수행하고 main 브랜치로 푸시하는 로직을 여기에 작성
+          # 예를 들어, 다음 명령어를 사용하여 브랜치를 main으로 병합하고 푸시할 수 있습니다:
+          # git checkout main
+          # git merge $GITHUB_REF
+          # git push
+
