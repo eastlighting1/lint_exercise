@@ -14,11 +14,16 @@ jobs:
     steps:
       - name: Check if main branch
         run: |
-          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-            echo "Direct push to main branch is not allowed. Workflow aborted."
-            exit 1
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            for file in $(find . -type f); do
+              if [ ! -d "${file}" ]; then
+                if [[ ! "${file}" =~ ".github/workflows" ]]; then
+                  echo "File ${file} cannot be pushed directly to main branch."
+                  exit 1
+                fi
+              fi
+            done
           fi
-        if: startsWith(github.ref, 'refs/heads/main') == false
 
       - name: Checkout code
         uses: actions/checkout@v2
