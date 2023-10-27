@@ -18,6 +18,7 @@ jobs:
             echo "Direct push to main branch is not allowed. Workflow aborted."
             exit 1
           fi
+        if: startsWith(github.ref, 'refs/heads/main') == false
 
       - name: Checkout code
         uses: actions/checkout@v2
