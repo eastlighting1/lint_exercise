@@ -1,7 +1,7 @@
 name: Pylint
 
 on:
-  push:
+  pull_request:
     paths:
       - '**.py' # .py 파일이 변경되었을 때만 실행
 
